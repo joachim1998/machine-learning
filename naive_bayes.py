@@ -17,7 +17,7 @@ from plot import plot_boundary
 
 class GaussianNaiveBayes(BaseEstimator, ClassifierMixin):
     def fit(self, X, y):
-        """Fit a Gaussian navie Bayes model using the training set (X, y).
+        """Fit a Gaussian naive Bayes model using the training set (X, y).
 
         Parameters
         ----------
