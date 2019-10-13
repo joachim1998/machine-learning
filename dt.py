@@ -32,19 +32,8 @@ def get_sets(nb_samples, nb_training_set, seed, which):
 # (Question 1)
 
 if __name__ == "__main__":
-    # Read the arguments from the command line. If there is no arguments when executing this file, no seeds are imposed.
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--seeds", help = "give 5 seeds", type = int, nargs = '*')
-    args = parser.parse_args()
-
-    if args.seeds:
-        seeds = args.seeds
-        if not len(seeds) == 5:
-            print("Need 5 seeds, try again")
-            sys.exit(-1)
-
-    else:
-        seeds = [1, 5, 9, 19, 2]
+    # The seed is imposed to have reproducible results
+    seed = 1
 
     # Definition of the dataset set size, the training set size and the different depths of the decision tree
     dataset_size = 2000
@@ -62,11 +51,11 @@ if __name__ == "__main__":
 
         for j in range(5):
             # Get the sets (testing and training)
-            x_train_sample, x_test_sample, y_train_sample, y_test_sample = get_sets(dataset_size, trainingSet_size, seeds[j], i+1)
+            x_train_sample, x_test_sample, y_train_sample, y_test_sample = get_sets(dataset_size, trainingSet_size, seed, i+1)
 
             for k in range(len(depth)):
                 # Get the decision tree from the training sample
-                decisionTree = DecisionTreeClassifier(max_depth = depth[k], random_state = seeds[j]).fit(x_train_sample, y_train_sample)
+                decisionTree = DecisionTreeClassifier(max_depth = depth[k], random_state = seed).fit(x_train_sample, y_train_sample)
 
                 # Predictions done from the training samples
                 prediction = decisionTree.predict(x_test_sample)
