@@ -41,23 +41,19 @@ class GaussianNaiveBayes(BaseEstimator, ClassifierMixin):
         if y.shape[0] != X.shape[0]:
             raise ValueError("The number of samples differs between X and y")
 
-        # ====================
-        # TODO your code here.
-        # ====================
-
-        #get all the unique classes
+        # Get all the unique classes
         classes, indices = np.unique(y, return_inverse=True)
 
-        #probability of beloging to a given class
+        # Probability of belonging to a given class
         self.__p_y = np.zeros(len(classes))
 
-        #mean of the elements for all the classes
+        # Mean of the elements for all the classes
         self.__moy = np.zeros(len(classes))
 
-        #variance of the elemnts for all the classes
+        # Variance of the elements for all the classes
         self.__var = np.zeros(len(classes))
 
-        #computing __py
+        # Computing __p_y
         for i in indices:
             self.__p_y[i] += 1
 
@@ -66,7 +62,7 @@ class GaussianNaiveBayes(BaseEstimator, ClassifierMixin):
         for i in range(len(self.__p_y)):
             self.__p_y[i] /= div
 
-        #computing __moy
+        # Computing __moy
 
         #Attention à tester si attributes grandis bien en Y
         #normalement ca devrait aller chopper tout les éléments de X et les placer dans la colonne correspondante à la classe!! à tester!!!
