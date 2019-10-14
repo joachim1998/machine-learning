@@ -48,10 +48,10 @@ class GaussianNaiveBayes(BaseEstimator, ClassifierMixin):
         self.__p_y = np.zeros(len(classes))
 
         # Mean of the elements for all the classes
-        self.__moy = np.zeros(len(classes))
+        self.__moy = np.zeros(len(classes),2)
 
         # Variance of the elements for all the classes
-        self.__var = np.zeros(len(classes))
+        self.__var = np.zeros(len(classes),2)
 
         # Computing __p_y
         for i in indices:
@@ -66,15 +66,14 @@ class GaussianNaiveBayes(BaseEstimator, ClassifierMixin):
 
         #Attention à tester si attributes grandis bien en Y
         #normalement ca devrait aller chopper tout les éléments de X et les placer dans la colonne correspondante à la classe!! à tester!!!
-        attributes = np.empty([len(classes), 1])
-        for i in range(len(classes)):
-            for j in range(len(y)):
-                if y[j]==classes[i]:
-                    attributes[i].append(X[j])
+        attributes = np.empty([len(classes)])
+        for i in range(len(indices)):
+            attributes[indices[i]].append(X[i])
+            attributes[indices[i]].append(X[i])
 
         #on regarde par rapport à toutes les classes et on prend la moyenne des attibuts de chaque classe
         for i in attributes:
-            self.__moy[i] = np.mean(attributes, axis=0) 
+            self.__moy[i] = np.mean(attributes, axis=1) 
         #mtn ca devrait etre bon, normalement chaque élément de moy va correspondre à la moyenne des éléments de X en fonction de la classe!! à tester et vérifier!!!
 
 
