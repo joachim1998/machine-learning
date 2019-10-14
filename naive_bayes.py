@@ -67,8 +67,10 @@ class GaussianNaiveBayes(BaseEstimator, ClassifierMixin):
         #Attention à tester si attributes grandis bien en Y
         #normalement ca devrait aller chopper tout les éléments de X et les placer dans la colonne correspondante à la classe!! à tester!!!
         attributes = np.empty([len(classes), 1])
-        for i in indices:
-            attributes[i].append(X[i])
+        for i in range(len(classes)):
+            for j in range(len(y)):
+                if y[j]==classes[i]:
+                    attributes[i].append(X[j])
 
         #on regarde par rapport à toutes les classes et on prend la moyenne des attibuts de chaque classe
         for i in attributes:
