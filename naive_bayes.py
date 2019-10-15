@@ -92,10 +92,27 @@ class GaussianNaiveBayes(BaseEstimator, ClassifierMixin):
         y : array of shape = [n_samples]
             The predicted classes, or the predict values.
         """
+        for h in range(len(X[:][0])
+            # Computation of the probabilities Pr(xi|y)
+            Pr = np.zeros(len(classes), len(X[0][:]))
+            Pr_classes = np.zeros(len(classes))
+            for i in classes
+                for j in range(len(X[0][:]))
+                    exp_num = math.pow(X[0][j]-self.__moy[i][j], 2)
+                    exp_den = 2*self.__var[i][j]
+                    exp = math.exp(-exp_num/exp_den)
+                    factor_den = math.pow(2*math.pi*self.__var[i][j], 1/2)
+                    Pr[i][j] = (1/factor_den)*exp
 
-        # ====================
-        # TODO your code here.
-        # ====================
+                P = Pr[i][0]*Pr[i][1]
+                Pr_classes[i] = self.__p_y[i]*P
+
+            # Prediction of the classe
+            index = Pr_classes.argmax()
+            y[h] = Pr_classes[index]
+        
+        return y
+                
 
         pass
 
