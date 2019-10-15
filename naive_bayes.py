@@ -14,6 +14,18 @@ from sklearn.base import ClassifierMixin
 from data import make_data1, make_data2
 from plot import plot_boundary
 
+def get_sets(nb_samples, nb_training_set, seed, which):
+    """
+    """
+    if which == 1:
+        dataset = make_data1(nb_samples, random_state = seed)
+    else:
+        dataset = make_data2(nb_samples, random_state = seed)
+
+    proportion_training_set = nb_training_set/nb_samples
+
+    return train_test_split(dataset[0], dataset[1], train_size=proportion_training_set, test_size=1-proportion_training_set , random_state=seed)
+
 
 class GaussianNaiveBayes(BaseEstimator, ClassifierMixin):
     def fit(self, X, y):
@@ -137,8 +149,19 @@ class GaussianNaiveBayes(BaseEstimator, ClassifierMixin):
         pass
 
 if __name__ == "__main__":
-    #from data import make_data
-    #from plot import plot_boundary
-
+    
     dataset_size = 2000
     trainingSet_size = 150
+                               
+    for i in range(2):
+        x_train_sample, x_test_sample, y_train_sample, y_test_sample = get_sets(dataset_size, trainingSet_size, 1, i+1)
+
+        nb = GaussianNaiveBayes().fit(x_train_sample, y_train_sample)
+        prediction = nb.predict(x_test_sample)
+        accuracy = accuracy_score(y_test_sample, prediction)
+                               
+        fname = "NB_ds=" + str(i+1)
+        title = "Naive Bayes classification with an accuracy of %0.4f" %accuracy
+
+        plot_boundary(fname, nb, x_test_sample, y_test_sample, 0.1, title)
+        
