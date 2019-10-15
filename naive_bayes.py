@@ -140,15 +140,17 @@ class GaussianNaiveBayes(BaseEstimator, ClassifierMixin):
             for i in range(len(self.__classes)):
                 Py = self.__p_y[i]          # Product of the different probabilities for one class
                 for j in range(len(X[0])):   # Number of loops = number of features
-                    exp_num = math.pow(X[h][j]-self.__moy[i][j], 2)
+                    temp = X[h][j]-self.__moy[i][j]
+                    exp_num = math.pow(temp, 2)
                     exp_den = 2*self.__var[i][j]
-                    exp = math.exp(-exp_num/exp_den)
-                    factor_den = math.pow(2*math.pi*self.__var[i][j], 1/2)
+                    exp = math.exp(-(exp_num/exp_den))
+                    temp = 2*math.pi*self.__var[i][j]
+                    factor_den = math.pow(temp, 1/2)
                     Py *= (1/factor_den)*exp
                     
                 p[h].append(Py)
-
-        print(np.shape(p))
+        p = np.matrix(p)
+        
         return p
 
 if __name__ == "__main__":
