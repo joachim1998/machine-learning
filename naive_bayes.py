@@ -7,9 +7,13 @@ Project 1 - Classification algorithms
 # -*- coding: utf-8 -*-
 
 import numpy as np
+import math
 
 from sklearn.base import BaseEstimator
 from sklearn.base import ClassifierMixin
+
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 
 from data import make_data1, make_data2
 from plot import plot_boundary
@@ -84,7 +88,7 @@ class GaussianNaiveBayes(BaseEstimator, ClassifierMixin):
             self.__p_y[i] /= div
 
         # Filling attributes with the samples
-        for i in range(len(indices))
+        for i in range(len(indices)):
             attributes[indices[i]].append(X[i])
             
         # Computation of the mean and the variance
@@ -108,21 +112,8 @@ class GaussianNaiveBayes(BaseEstimator, ClassifierMixin):
             The predicted classes, or the predict values.
         """
         
-        y = []
-        for h in range(len(X)):             # Number of loops = number of samples
-            max = 0
-            for i in range(len(self.__classes)):
-                Py = self.__p_y[i]          # Product of the different probabilities for one class
-                for j in range(len(X[0]):   # Number of loops = number of features
-                    exp_num = math.pow(X[h][j]-self.__moy[i][j], 2)
-                    exp_den = 2*self.__var[i][j]
-                    exp = math.exp(-exp_num/exp_den)
-                    factor_den = math.pow(2*math.pi*self.__var[i][j], 1/2)
-                    Py *= (1/factor_den)*exp
-                if Py > max:
-                   predict_classe = self.__classes[i]
-                   max = Py
-            y[h] = predict_classe
+        p = self.predict_proba(X)
+        y = self.__classes[np.argmax(p, axis = 1)]
 
         return y
                 
@@ -142,11 +133,23 @@ class GaussianNaiveBayes(BaseEstimator, ClassifierMixin):
             by lexicographic order.
         """
 
-        # ====================
-        # TODO your code here.
-        # ====================
+        p = []
+        for h in range(len(X)):             # Number of loops = number of samples
+            max = 0
+            p.append([])
+            for i in range(len(self.__classes)):
+                Py = self.__p_y[i]          # Product of the different probabilities for one class
+                for j in range(len(X[0])):   # Number of loops = number of features
+                    exp_num = math.pow(X[h][j]-self.__moy[i][j], 2)
+                    exp_den = 2*self.__var[i][j]
+                    exp = math.exp(-exp_num/exp_den)
+                    factor_den = math.pow(2*math.pi*self.__var[i][j], 1/2)
+                    Py *= (1/factor_den)*exp
+                    
+                p[h].append(Py)
 
-        pass
+        print(np.shape(p))
+        return p
 
 if __name__ == "__main__":
     
