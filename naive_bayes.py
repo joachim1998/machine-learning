@@ -132,7 +132,8 @@ class GaussianNaiveBayes(BaseEstimator, ClassifierMixin):
             The class probabilities of the input samples. Classes are ordered
             by lexicographic order.
         """
-
+        
+        Z = 0
         p = []
         for h in range(len(X)):             # Number of loops = number of samples
             max = 0
@@ -149,7 +150,14 @@ class GaussianNaiveBayes(BaseEstimator, ClassifierMixin):
                     Py *= (1/factor_den)*exp
                     
                 p[h].append(Py)
+                Z += Py
+                
+        for i in range(len(p)):
+            p[i] /= Z
+            
         p = np.matrix(p)
+        print("Probabilities:")
+        print(p)
         
         return p
 
