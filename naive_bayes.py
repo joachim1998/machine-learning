@@ -156,8 +156,6 @@ class GaussianNaiveBayes(BaseEstimator, ClassifierMixin):
             p[i] /= Z
             
         p = np.matrix(p)
-        print("Probabilities:")
-        print(p)
         
         return p
 
