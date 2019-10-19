@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
             for k in range(len(depth)):
                 # Get the decision tree from the training sample
-                decisionTree = DecisionTreeClassifier(max_depth = depth[k], random_state = seed).fit(x_train_sample, y_train_sample)
+                decisionTree = DecisionTreeClassifier(max_depth = depth[k], random_state = j).fit(x_train_sample, y_train_sample)
 
                 # Predictions done from the training samples
                 prediction = decisionTree.predict(x_test_sample)
