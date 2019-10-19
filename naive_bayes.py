@@ -20,6 +20,18 @@ from plot import plot_boundary
 
 def get_sets(nb_samples, nb_training_set, seed, which):
     """
+    Return the training and testing sets for a given number of samples, a proportion of training
+    set, a seed and for a dataset
+    
+    Arguments:
+        nb_sample: the number of samples in the dataset
+        nb_training_set: size of the training set
+        seed: the seed used to make some random operations
+        which: which dataset should be used
+        
+    Return:
+        The result of the function train_test_split on the part X and y of the dataset, the proportion
+        of the training set and learning set and on the seed.
     """
     if which == 1:
         dataset = make_data1(nb_samples, random_state = seed)
