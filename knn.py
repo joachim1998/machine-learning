@@ -68,7 +68,7 @@ def get_accuracy(n_neighbors, seed, which, dataset_size, trainingSet_size):
         # Predictions done from the training samples
         prediction = knn.predict(x_test_sample)
 
-        # Computation of the accuracy
+        # Compute the accuracy
         accuracy = accuracy_score(y_test_sample, prediction)
 
         # Plot
@@ -78,7 +78,7 @@ def get_accuracy(n_neighbors, seed, which, dataset_size, trainingSet_size):
 
         plot_boundary(fname, knn, x_test_sample, y_test_sample, 0.1, title)
 
-        print("The accuracy for the dataset " + str(which) + " is : %0.4f" %accuracy)
+        print("The accuracy for the dataset " + str(which) + " is: %0.4f" %accuracy)
 
 def tenfold(nb_sub, nb_neighbors, nb_samples, which):
     """
@@ -120,8 +120,8 @@ def tenfold(nb_sub, nb_neighbors, nb_samples, which):
 
         neighbors += 1
 
-    print("The optimal number of neighbours is : " + str(optimal_nb_neighbors) + \
-            " with and accuracy of %0.4f" %max_score)
+    print("The optimal number of neighbours is: " + str(optimal_nb_neighbors) + \
+            " with an accuracy of %0.4f" %max_score)
 
     plt.plot(neighbors_toplot, results)
     plt.xlabel('Number of neighbours')
