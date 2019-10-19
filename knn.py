@@ -21,6 +21,18 @@ from matplotlib import pyplot as plt
 
 def get_sets(nb_samples, nb_training_set, seed, which):
     """
+    Return the training and testing sets for a given number of samples, a proportion of training
+    set, a seed and for a dataset
+    
+    Arguments:
+        nb_sample: the number of samples in the dataset
+        nb_training_set: size of the training set
+        seed: the seed used to make some random operations
+        which: which dataset should be used
+        
+    Return:
+        The result of the function train_test_split on the part X and y of the dataset, the proportion
+        of the training set and learning set and on the seed.
     """
     if which == 1:
         dataset = make_data1(nb_samples, random_state = seed)
@@ -33,6 +45,18 @@ def get_sets(nb_samples, nb_training_set, seed, which):
 
 def get_accuracy(n_neighbors, seed, which, dataset_size, trainingSet_size):
     """
+    This function will predict with the KNN class and build a graph based on the prediction,
+    it will also print the accuracy corresponding to the graph
+    
+    Arguments:
+        n_neighbors: an array containing all the number of neighbors of which we should apply KNN
+        seed: this is used to make random operation
+        which: which dataset should be used
+        dataset_size: the number of samples in the dataset
+        trainingSet_size: the number of samples in the training set
+        
+    Return:
+        /
     """
     # Get the sets
     x_train_sample, x_test_sample, y_train_sample, y_test_sample = get_sets(dataset_size, trainingSet_size, seed, which)
@@ -58,6 +82,17 @@ def get_accuracy(n_neighbors, seed, which, dataset_size, trainingSet_size):
 
 def tenfold(nb_sub, nb_neighbors, nb_samples, which):
     """
+    This function will implementent the K-fold cros validation startegy and plot the different
+    accuracies in fonction of the number of neighbors
+    
+    Argument:
+        nb_sub: the number of sub-division of the samples in order to make the K-fold strategy
+        nb_neighbors: the maximal number of neighbors
+        nb_samples: the number of samples in the dataset
+        which: which dataset should be used
+        
+    Return:
+        /
     """
     results = []
     neighbors_toplot = []
