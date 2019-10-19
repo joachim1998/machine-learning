@@ -32,9 +32,6 @@ def get_sets(nb_samples, nb_training_set, seed, which):
 # (Question 1)
 
 if __name__ == "__main__":
-    # The seed is imposed to have reproducible results
-    seed = 1
-
     # Definition of the dataset set size, the training set size and the different depths of the decision tree
     dataset_size = 2000
     trainingSet_size = 150
@@ -51,7 +48,7 @@ if __name__ == "__main__":
 
         for j in range(5):
             # Get the sets (testing and training)
-            x_train_sample, x_test_sample, y_train_sample, y_test_sample = get_sets(dataset_size, trainingSet_size, seed, i+1)
+            x_train_sample, x_test_sample, y_train_sample, y_test_sample = get_sets(dataset_size, trainingSet_size, j, i+1)
 
             for k in range(len(depth)):
                 # Get the decision tree from the training sample
@@ -67,6 +64,7 @@ if __name__ == "__main__":
                 # Plot the best accuracy
                 if accuracy > best_accuracy:
                     to_plot = [decisionTree, x_test_sample, y_test_sample, accuracy]
+                    best_accuracy = accuracy
 
                     if j == 4:
                         fname = "DTC_depth=" + str(depth[k]) + "_ds=" + str(i+1)
