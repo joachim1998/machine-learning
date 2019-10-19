@@ -90,7 +90,7 @@ if __name__ == "__main__":
             avg_accuracy = sum(accuracies[j])/5
             deviation = np.std(accuracies[j])
 
-            print("From dataset %d :" %(i+1))
+            print("From dataset %d:" %(i+1))
             print("Depth = " + str(depth[j]))
             print("Average accuracy = %0.4f" %avg_accuracy)
             print("Deviation = %0.4f" %deviation)
