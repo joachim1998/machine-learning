@@ -78,12 +78,12 @@ if __name__ == "__main__":
                     to_plot = [decisionTree, x_test_sample, y_test_sample, accuracy]
                     best_accuracy = accuracy
 
-                    if j == 4:
-                        fname = "DTC_depth=" + str(depth[k]) + "_ds=" + str(i+1)
-                        title = "Decision Tree Classifier with a depth of " + str(depth[k]) \
-                                + " with an accuracy of %0.4f" %to_plot[3]
+                if j == 4:
+                    fname = "DTC_depth=" + str(depth[k]) + "_ds=" + str(i+1)
+                    title = "Decision Tree Classifier with a depth of " + str(depth[k]) \
+                            + " with an accuracy of %0.4f" %to_plot[3]
 
-                        plot_boundary(fname, to_plot[0], to_plot[1], to_plot[2], 0.1, title)
+                    plot_boundary(fname, to_plot[0], to_plot[1], to_plot[2], 0.1, title)
 
         # Compute the average accuracies over 5 generations of the dataset
         for j in range(5):
